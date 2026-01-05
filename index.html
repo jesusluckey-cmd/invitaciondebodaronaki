@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación de Boda</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ================= VARIABLES ================= */
+:root{
+  --primary:#8b6f47;
+  --accent:#c7a86b;
+  --text:#3b3b3b;
+}
+
+/* ================= BASE ================= */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:'Montserrat',sans-serif;
+  overflow:hidden;
+}
+
+/* ================= ESCENA CARTA ================= */
+.scene{
+  position:fixed;
+  inset:0;
+  background:#f7b7c8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  z-index:10;
+  transition:opacity 1s ease;
+}
+
+/* NUBES */
+.cloud{
+  position:absolute;
+  background:#fff;
+  width:180px;
+  height:60px;
+  border-radius:50px;
+  opacity:.9;
+  animation:clouds linear infinite;
+}
+.cloud::before,
+.cloud::after{
+  content:'';
+  position:absolute;
+  background:#fff;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  top:-40px;
+}
+.cloud::before{left:20px}
+.cloud::after{right:20px}
+
+@keyframes clouds{
+  from{transform:translateX(-250px)}
+  to{transform:translateX(110vw)}
+}
+
+/* CORAZONES */
+.heart{
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:#ff4d6d;
+  transform:rotate(45deg);
+  animation:float 6s linear infinite;
+  opacity:.8;
+}
+.heart::before,
+.heart::after{
+  content:'';
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:#ff4d6d;
+  border-radius:50%;
+}
+.heart::before{top:-8px}
+.heart::after{left:-8px}
+
+@keyframes float{
+  0%{transform:translateY(0) rotate(45deg);opacity:0}
+  20%{opacity:1}
+  100%{transform:translateY(-320px) rotate(45deg);opacity:0}
+}
+
+/* CARTA CENTRAL */
+.center-card{
+  background:#fff;
+  border-radius:20px;
+  padding:40px 30px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 30px 70px rgba(0,0,0,.25);
+  cursor:pointer;
+  animation:fadeUp 1.4s ease forwards;
+  transition:transform .6s ease, opacity .6s ease;
+  z-index:5;
+}
+.center-card:hover{transform:scale(1.03)}
+
+.center-card h1{
+  font-family:'Playfair Display',serif;
+  margin:10px 0;
+}
+.names{
+  font-family:'Great Vibes',cursive;
+  font-size:38px;
+  color:#b76e79;
+  margin:10px 0;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ================= INVITACIÓN ================= */
+.invitation{
+  display:none;
+  background:#fff;
+  min-height:100vh;
+  padding:20px;
+}
+
+.card{
+  max-width:720px;
+  margin:40px auto;
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.12);
+  overflow:hidden;
+}
+
+.header{
+  padding:48px 32px 24px;
+  text-align:center;
+}
+.monogram{
+  font-family:'Great Vibes',cursive;
+  font-size:64px;
+  color:var(--primary);
+}
+.header h1{
+  font-family:'Playfair Display',serif;
+  margin:0;
+  font-size:34px;
+}
+
+.divider{
+  width:120px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  margin:18px auto;
+}
+
+.content{
+  padding:24px 40px 40px;
+  text-align:center;
+  color:var(--text);
+}
+.names-invite{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  color:var(--primary);
+}
+.details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin:28px 0;
+}
+.detail-box{
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:18px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 28px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:640px){
+  .details{grid-template-columns:1fr}
+  .names-invite{font-size:26px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene" id="scene" onclick="openInvitation()">
+
+  <div class="cloud" style="top:15%;animation-duration:45s"></div>
+  <div class="cloud" style="top:40%;animation-duration:35s"></div>
+  <div class="cloud" style="top:65%;animation-duration:55s"></div>
+
+  <span class="heart" style="left:15%"></span>
+  <span class="heart" style="left:35%;animation-delay:1s"></span>
+  <span class="heart" style="left:55%;animation-delay:2s"></span>
+  <span class="heart" style="left:75%;animation-delay:.6s"></span>
+
+  <div class="center-card">
+    ❤️
+    <h1>INVITACION DE BODA</h1>
+    <p>Estas cordialmente invitado a celebrar nuestra unión.</p>
+    <div class="names">Ronny & Erika</div>
+    <p>¡DA CLICK EN EL MENSAJE PARA RECIBIR LA CARTA COMPLETA!</p>
+  </div>
+</div>
+
+<div class="invitation" id="invitation">
+  <div class="card">
+    <div class="header">
+      <div class="monogram">R & R</div>
+      <h1>¡Boda en Roblox!</h1>
+      <div class="divider"></div>
+    </div>
+
+    <div class="content">
+      <p>Tenemos el honor de invitarte a celebrar nuestra unión</p>
+      <div class="names-invite">Ronny & Erika</div>
+      <p>En el servidor de Discord se anunciará el juego y link del servidor</p>
+
+      <p><strong>MARTES · 6 DE ENERO · 3:00 P.M.</strong></p>
+
+      <div class="details">
+        <div class="detail-box">
+          <h3>Ceremonia</h3>
+          <p>4:00 p.m.<br>Servidor de Roblox<br>Evento Privado</p>
+        </div>
+        <div class="detail-box">
+          <h3>Recepción</h3>
+          <p>6:00 p.m.<br>Recepción en Roblox<br>Después de la ceremonia</p>
+        </div>
+      </div>
+
+      <p>Tu presencia hará nuestro día aún más especial ✨</p>
+
+      <a class="btn" href="https://discord.gg/Kcth37j4vG" target="_blank">
+        Confirmar asistencia en Discord
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openInvitation(){
+  const scene = document.getElementById('scene');
+  scene.style.opacity='0';
+
+  setTimeout(()=>{
+    scene.style.display='none';
+    document.getElementById('invitation').style.display='block';
+    document.body.style.overflow='auto';
+  },1000);
+}
+</script>
+
+</body>
+</html>
